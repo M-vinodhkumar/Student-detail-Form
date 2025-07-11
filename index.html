@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Details Form</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <!--Form layout-->
+    <div class="form-container">
+        <h1>STUDENT FORM</h1>
+
+        <div>
+            <form id="studentForm">
+                <table class="table-container">
+                    <tr>
+
+                        <td><label for="name">Name</label>
+                            <input type="text" placeholder="Enter Your Name" id="name" required>
+
+                            <label type="age">Age</label>
+                            <input type="number" placeholder="Enter Your Age" id="age" required>
+
+                            <label>Gender</label>
+                            <div class="gender-box">
+                                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                                <label><input type="radio" name="gender" value="Female"> Female</label>
+                            </div>
+
+                            <label for="course">Course</label>
+                            <select id="course" required>
+                                <option value="">--Select--</option>
+                                <option value="Aws">AWS</option>
+                                <option value="cloud computing">CLOUD COMPUTING</option>
+                                <option value="cyber security">CYBER SECURITY</option>
+                                <option value="Advanced java programming">ADVANCED JAVA PROGRAMMING</option>
+                                <option value="oops">OOPS</option>
+                            </select>
+
+                            <label for="email">E-mail</label>
+                            <input type="email" placeholder="Enter Your Mail" id="email" required>
+                            <button type="submit" class="btn">Save</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <!--student details heading-->
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Course</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Add the student details-->
+        </tbody>
+    </table>
+
+    <script>
+        var form = document.getElementById('studentForm');
+        var table = document.getElementById('studentTable');
+        var tableBody = table.querySelector('tbody');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var name = document.getElementById('name').value;
+            var age = document.getElementById('age').value;
+            var gender = document.querySelector('input[name="gender"]:checked').value;
+            var course = document.getElementById('course').value;
+            var email = document.getElementById('email').value;
+
+            var row = document.createElement('tr');
+            row.innerHTML = `
+        <td>${name}</td>
+        <td>${age}</td>
+        <td>${gender}</td>
+        <td>${course}</td>
+        <td>${email}</td>
+        <td><button class="delete-btn">Delete</button></td>
+    `;
+
+
+            tableBody.appendChild(row);
+
+            table.style.display = 'table';
+
+            form.reset();
+
+
+            row.querySelector('.delete-btn').addEventListener('click', function () {
+                row.remove();
+                if (tableBody.children.length === 0) {
+                    table.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
